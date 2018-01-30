@@ -3,18 +3,20 @@ This is a calculator for determining how many coins a cashier would need to retu
 Not everyone's the best at math! So this can be helpful.
 """
 
+from decimal import Decimal
+
 
 def change_calc():
 
     customer_total = input("What was the customer's total? ")
     customer_amount_given = input("How much did the customer give you? ")
-    customer_total = float(customer_total)
-    customer_amount_given = float(customer_amount_given)
+    customer_total = Decimal(customer_total)
+    customer_amount_given = Decimal(customer_amount_given)
 
     # find the difference (total change to be provided)
-    change_total = customer_amount_given - customer_total
+    change_total = Decimal(customer_amount_given - customer_total)
     # tell user the amount they owe the customer
-    print("You owe the customer: $%.2f" % change_total)
+    print("You owe the customer: $" + str(change_total))
 
     # these are given +1 each time one of their values is subtracted from the change_total until the subtraction
     # goes below 0 then stops and moves on, giving an integer count of how many coins to return to the customer
@@ -24,28 +26,27 @@ def change_calc():
     dimes_returned = 0
     nickels_returned = 0
     pennies_returned = 0
-
     # first check how many dollars to return
-    while change_total > 0:
-        if change_total - 1 >= 0:
+    while change_total >= 0:
+        if change_total - Decimal(1.0) >= 0:
             dollars_returned += 1
-            change_total -= 1
+            change_total -= 1.0
         else:
-            if change_total - .25 >= 0:
+            if change_total - Decimal(0.25) >= 0:
                 quarters_returned += 1
-                change_total -= .25
+                change_total -= Decimal(0.25)
             else:
-                if change_total - .1 >= 0:
+                if change_total - Decimal(0.1) >= 0:
                     dimes_returned += 1
-                    change_total -= .1
+                    change_total -= Decimal(0.1)
                 else:
-                    if change_total - .05 >= 0:
+                    if change_total - Decimal(0.05) >= 0:
                         nickels_returned += 1
-                        change_total -= .05
+                        change_total -= Decimal(0.05)
                     else:
-                        if change_total - .01 > 0:
+                        if change_total - Decimal(0.01) > 0:
                             pennies_returned += 1
-                            change_total -= .01
+                            change_total -= Decimal(0.01)
                         else:
                             pennies_returned += 1
                             break
