@@ -27,37 +27,21 @@ def change_calc():
 
     # first check how many dollars to return
     while change_total > 0:
-        if change_total - 1 > 0:
-            # adds one dollar to "amount to give back". and tries to subtract again.
-            # process repeated for other currencies.
+        if change_total - 1 >= 0:
             dollars_returned += 1
             change_total -= 1
-        # if the change amount given to a customer hits zero (eg $1 in change), then loop breaks to print area,
-        elif change_total - 1 == 0:
-            dollars_returned += 1
-            break
-    # if it doesn't subtract evenly... continue to next currency
         else:
-            if change_total - .25 > 0:
+            if change_total - .25 >= 0:
                 quarters_returned += 1
                 change_total -= .25
-            elif change_total - .25 == 0:
-                quarters_returned += 1
-                break
             else:
-                if change_total - .1 > 0:
+                if change_total - .1 >= 0:
                     dimes_returned += 1
                     change_total -= .1
-                elif change_total - .1 == 0:
-                    dimes_returned += 1
-                    break
                 else:
-                    if change_total - .05 > 0:
+                    if change_total - .05 >= 0:
                         nickels_returned += 1
                         change_total -= .05
-                    elif change_total - .05 == 0:
-                        nickels_returned += 1
-                        break
                     else:
                         if change_total - .01 > 0:
                             pennies_returned += 1
